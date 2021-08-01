@@ -27,11 +27,18 @@ function formatAndSendTweet(event) {
     return tweet.handleDupesAndTweet(tokenName, tweetText, image);
 }
 
+function formatAndSendTweetTest() {
+    const tweetText = `Test`;
+    console.log(tweetText);
+    return tweet.handleDupesAndTweet('test', tweetText, 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg');
+}
+
 // Poll OpenSea every minute & retrieve all sales for a given collection in the last minute
 // Then pass those events over to the formatter before tweeting
 setInterval(() => {
+    return formatAndSendTweetTest();
     const lastMinute = moment().startOf('minute').subtract(59, "seconds").unix();
-
+    
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
             collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
