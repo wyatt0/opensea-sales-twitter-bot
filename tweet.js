@@ -31,11 +31,11 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
             const statusOlderThan10Mins = moment(mostRecentMatchingTweetCreatedAt).isBefore(moment().subtract(10, 'minutes'));
 
             // Status found is older than 10 minutes, not a cached transaction, just sold at same price
-            if (statusOlderThan10Mins) {
+            //if (statusOlderThan10Mins) {
                 console.log('Previous status is older than 10 minutes, continuing to tweet...');
 
                 return tweet(tweetText, imageUrl);
-            }
+            //}
 
             console.error('Tweet is a duplicate; possible delayed transaction retrieved from OpenSea');
         } else {
