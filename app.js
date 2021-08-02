@@ -11,8 +11,6 @@ function formatAndSendTweet(event) {
     const totalPrice = _.get(event, 'total_price');
     const usdValue = _.get(event, ['payment_token', 'usd_price']);
     const tokenSymbol = _.get(event, ['payment_token', 'symbol']);
-    const seller = _.get(event, ['from_account', 'address']);
-    const buyer = _.get(event, ['to_account', 'address']);
 
     const formattedTokenPrice = ethers.utils.formatEther(totalPrice.toString());
     const formattedUsdPrice = (formattedTokenPrice * usdValue).toFixed(2);
@@ -22,7 +20,7 @@ function formatAndSendTweet(event) {
             : ` ${tokenSymbol}`
     );
 
-    const tweetText = `${tokenName} bought for ${formattedTokenPrice}${formattedPriceSymbol} ($${formattedUsdPrice}) by ${buyer} from ${seller} #Colorglyphs ${openseaLink}`;
+    const tweetText = `${tokenName} bought for ${formattedTokenPrice}${formattedPriceSymbol} ($${formattedUsdPrice}) #Colorglyphs ${openseaLink}`;
 
     console.log(tweetText);
 
