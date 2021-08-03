@@ -50,6 +50,6 @@ setInterval(() => {
         });
     }).catch((error) => {
         console.error("here4");
-        //console.error(error);
+        console.error(error);
     });
 }, 60000);
