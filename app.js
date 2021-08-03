@@ -26,7 +26,7 @@ function formatAndSendTweet(event) {
 
     return tweet.handleDupesAndTweet(tokenName, tweetText, image);
 }
-function formatAndSendTweet(event) {
+function formatAndSendTweetTest(event) {
     const tweetText = `testtwiapi2`;
 
     console.log(tweetText);
