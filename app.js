@@ -5,6 +5,7 @@ const { ethers } = require('ethers');
 const tweet = require('./tweet');
 
 function formatAndSendTweet(event) {
+    console.log("here1");
     const tokenName = _.get(event, ['asset', 'name']);
     const image = _.get(event, ['asset', 'image_url']);
     const openseaLink = _.get(event, ['asset', 'permalink']);
@@ -40,6 +41,7 @@ setInterval(() => {
             only_opensea: 'false'
         }
     }).then((response) => {
+        console.log("here2");
         const events = _.get(response, ['data', 'asset_events']);
 
         console.log(`${events.length} sales in the last minute...`);
