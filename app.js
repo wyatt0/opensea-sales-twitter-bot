@@ -32,7 +32,6 @@ function formatAndSendTweet(event) {
 // Then pass those events over to the formatter before tweeting
 setInterval(() => {
     const lastMinute = moment().startOf('minute').subtract(59, "seconds").unix();
-    
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
             collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
@@ -50,6 +49,7 @@ setInterval(() => {
             return formatAndSendTweet(event);
         });
     }).catch((error) => {
+        console.error("here4");
         console.error(error);
     });
 }, 60000);
