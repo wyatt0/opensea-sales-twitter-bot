@@ -44,7 +44,7 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
     });
 }
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
-async function tweet(tweetText, imageUrl) {
+async function tweett(tweetText, imageUrl) {
     const tweet = {
                 status: tweetText
     };
@@ -56,10 +56,39 @@ async function tweet(tweetText, imageUrl) {
                 //}
      //});
 }
+function svgString2Image(svgString) {
+    // SVG data URL from SVG string
+    var svgData = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
+    // create canvas in memory(not in DOM)
+    var canvas = document.createElement('canvas');
+    // get canvas context for drawing on canvas
+    var context = canvas.getContext('2d');
+    // set canvas size
+    canvas.width = 800;
+    canvas.height = 800;
+    // create image in memory(not in DOM)
+    var image = new Image();
+    // later when image loads run this
+    image.onload = function () { // async (happens later)
+        // clear canvas
+        context.clearRect(0, 0, width, height);
+        // draw image with SVG data to canvas
+        context.drawImage(image, 0, 0, width, height);
+        // snapshot canvas as png
+        var pngData = canvas.toDataURL('image/png');
+        // pass png data URL to callback
+        return pngData;
+    }; // end async
+    // start loading SVG data into in memory image
+    image.src = svgData;
+}
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
-async function tweett(tweetText, imageUrl) {
+async function tweet(tweetText, imageUrl) {
+    const processedSVGBlob = await getBase64(imageUrl);
+    imageUrl = svgString2Image(processedSVGBlob);
+    
     // Format our image to base64
-    imageUrl = 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg';
+    //imageUrl = 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg';
     console.log(imageUrl);
     const processedImage = await getBase64(imageUrl);
     console.log(processedImage);
