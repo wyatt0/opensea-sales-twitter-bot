@@ -47,6 +47,7 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
     // Format our image to base64
+    console.log(imageUrl);
     const processedImage = await getBase64(imageUrl);
     console.log("imageprocessed");
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
