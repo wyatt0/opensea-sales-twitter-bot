@@ -33,16 +33,6 @@ function formatAndSendTweet(event) {
 // Then pass those events over to the formatter before tweeting
 setInterval(() => {
     const lastMinute = moment().startOf('minute').subtract(59, "seconds").unix();
-
-    const url = 'collection_slug=Colorglyphs&event_type=successful&occurred_after=' + lastMinute + '&only_opensea=false';
-    const options = {method: 'GET', headers: {Accept: 'application/json'}};
-
-    fetch(url, options)
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.error('error:' + err));
-    
-    console.log("ReachedAfterFetch");
     
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
