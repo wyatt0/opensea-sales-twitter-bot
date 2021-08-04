@@ -3,7 +3,6 @@ const _ = require('lodash');
 const moment = require('moment');
 const { ethers } = require('ethers');
 const tweet = require('./tweet');
-const fetch = require('node-fetch');
 
 function formatAndSendTweet(event) {
     console.log("here1");
