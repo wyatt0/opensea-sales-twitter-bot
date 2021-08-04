@@ -52,6 +52,7 @@ async function tweet(tweetText, imageUrl) {
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
     twitterClient.post('media/upload', { media_data: processedImage }, (error, media, response) => {
         if (!error) {
+            console.log("noerror");
             const tweet = {
                 status: tweetText,
                 media_ids: [media.media_id_string]
