@@ -47,9 +47,10 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
     // Format our image to base64
+    imageUrl = 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg';
     console.log(imageUrl);
     const processedImage = await getBase64(imageUrl);
-    //console.log(processedImage);
+    console.log(processedImage);
     console.log("imageprocessed");
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
     twitterClient.post('media/upload', { media_data: processedImage }, (error, media, response) => {
@@ -60,12 +61,12 @@ async function tweet(tweetText, imageUrl) {
                 media_ids: [media.media_id_string]
             };
 
-            twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
-                if (!error) {
-                    console.log(`Successfully tweeted: ${tweetText}`);
-                } else {
-                    console.error(error);
-                }
+            //twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
+            //    if (!error) {
+            //        console.log(`Successfully tweeted: ${tweetText}`);
+            //    } else {
+            //        console.error(error);
+            //    }
             });
         } else {
             console.error(error);
