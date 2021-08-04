@@ -43,9 +43,21 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
         }
     });
 }
-
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
+    const tweet = {
+                status: tweetText
+    };
+    twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
+                if (!error) {
+                    console.log(`Successfully tweeted: ${tweetText}`);
+                } else {
+                    console.error(error);
+                }
+     });
+}
+// Upload image of item retrieved from OpenSea & then tweet that image + provided text
+async function tweett(tweetText, imageUrl) {
     // Format our image to base64
     imageUrl = 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg';
     console.log(imageUrl);
