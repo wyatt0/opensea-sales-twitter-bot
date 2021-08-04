@@ -48,13 +48,13 @@ async function tweet(tweetText, imageUrl) {
     const tweet = {
                 status: tweetText
     };
-    twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
-                if (!error) {
-                    console.log(`Successfully tweeted: ${tweetText}`);
-                } else {
-                    console.error(error);
-                }
-     });
+    //twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
+                //if (!error) {
+                //    console.log(`Successfully tweeted: ${tweetText}`);
+                //} else {
+                //    console.error(error);
+                //}
+     //});
 }
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweett(tweetText, imageUrl) {
