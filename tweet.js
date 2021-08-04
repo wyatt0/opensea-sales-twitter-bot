@@ -67,7 +67,7 @@ async function tweet(tweetText, imageUrl) {
             //    } else {
             //        console.error(error);
             //    }
-            });
+            //});
         } else {
             console.error(error);
         }
