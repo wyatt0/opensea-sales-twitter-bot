@@ -84,15 +84,18 @@ function svgString2Image(svgString) {
 }
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
-    const processedSVGBlob = await getBase64(imageUrl);
-    imageUrl = svgString2Image(processedSVGBlob);
+    //const processedSVGBlob = await getBase64(imageUrl);
+    //imageUrl = svgString2Image(processedSVGBlob);
     
     // Format our image to base64
-    //imageUrl = 'https://www.lotus-qa.com/wp-content/uploads/2020/02/testing.jpg';
-    console.log(imageUrl);
+    const pngimageUrl = 'https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png';
+    console.log("SVG URL: " + imageUrl);
+    console.log("PNG URL: " + pngimageUrl);
+    
+    const processedPng = await getBase64(pngimageUrl);
     const processedImage = await getBase64(imageUrl);
-    console.log(processedImage);
-    console.log("imageprocessed");
+    console.log("SVG Proccessed: " + imageUrl);
+    console.log("PNG Proccessed: " + processedImage);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
     twitterClient.post('media/upload', { media_data: processedImage }, (error, media, response) => {
         if (!error) {
