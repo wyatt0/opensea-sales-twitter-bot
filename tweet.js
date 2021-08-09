@@ -3,6 +3,7 @@ const twit = require('twit');
 const moment = require('moment');
 const _ = require('lodash');
 const { spawn } = require('child_process');
+const sharp = require('sharp');
 
 const twitterConfig = {
     consumer_key: process.env.CONSUMER_KEY,
@@ -61,6 +62,9 @@ async function tweett(tweetText, imageUrl) {
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
     const childPython = spawn('python', ['--version']);
+    
+    const imagee = await sharp(imageUrl).toFormate('png').toBuffer();
+    
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
     
@@ -74,7 +78,7 @@ async function tweet(tweetText, imageUrl) {
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
-    twitterClient.post('media/upload', { media_data: processedImage }, (error, media, response) => {
+    twitterClient.post('media/upload', { media_data: imagee }, (error, media, response) => {
         if (!error) {
             console.log("noerror");
             const tweet = {
