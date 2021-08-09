@@ -109,6 +109,7 @@ async function tweet(tweetText, imageUrl) {
             //    }
             //});
         } else {
+            console.error("yo?");
             console.error(error);
         }
     });
