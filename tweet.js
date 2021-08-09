@@ -80,7 +80,7 @@ async function tweet(tweetText, imageUrl) {
         .toBuffer();
     console.log(imager)
     
-    const imagee = "";
+    let imagee = "";
     sharp(processedImage)
         .toFormat('png')
         .toBuffer()
