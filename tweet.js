@@ -78,7 +78,7 @@ async function tweet(tweetText, imageUrl) {
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
-    twitterClient.post('media/upload', { media_data: imagee }, (error, media, response) => {
+    twitterClient.post('media/upload', { media_data: image }, (error, media, response) => {
         if (!error) {
             console.log("noerror");
             const tweet = {
