@@ -2,6 +2,7 @@ const axios = require('axios');
 const twit = require('twit');
 const moment = require('moment');
 const _ = require('lodash');
+const { spawn } = require('child_process');
 
 const twitterConfig = {
     consumer_key: process.env.CONSUMER_KEY,
@@ -59,6 +60,7 @@ async function tweett(tweetText, imageUrl) {
 
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
+    const childPython = spawn('python', ['--version'];
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
     
