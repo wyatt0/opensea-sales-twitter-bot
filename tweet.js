@@ -74,7 +74,7 @@ async function tweet(tweetText, imageUrl) {
     //console.log("PNG URL: " + pngimageUrl);
     
     const processedImage = await getBase64(imageUrl);
-    
+    console.log("yo");
     const imagee = await sharp(processedImage).toFormat('png').toBuffer();
     //const processedPng = await getBase64(pngimageUrl);
     //console.log("SVG Proccessed: " + processedImage);
