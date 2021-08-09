@@ -60,26 +60,14 @@ async function tweett(tweetText, imageUrl) {
 }
 
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
-async function tweet(tweetText, imageUrl) {
-    const childPython = spawn('python', ['--version']);
+async function tweet(tweetText, imageUrl) { 
+    const prcTest = await getBase64('https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png');
     
+    //
     
-    
-    //const processedSVGBlob = await getBase64(imageUrl);
-    //imageUrl = svgString2Image(processedSVGBlob);
-    
-    // Format our image to base64
-    //const pngimageUrl = 'https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png';
-    console.log("SVG URL: " + imageUrl);
-    //console.log("PNG URL: " + pngimageUrl);
-    
+    console.log("SVG URL: " + imageUrl);   
     const processedImage = await getBase64(imageUrl);
-    console.log("yo");
-    const imager = sharp(processedImage)
-        .toFormat('png')
-        .toBuffer();
-    console.log(imager)
-    
+    console.log("yo"); 
     let imagee = "";
     await sharp(processedImage)
         .toFormat('png')
@@ -93,7 +81,7 @@ async function tweet(tweetText, imageUrl) {
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
-    twitterClient.post('media/upload', { media_data: imagee }, (error, media, response) => {
+    twitterClient.post('media/upload', { media_data: prcTest }, (error, media, response) => {
         if (!error) {
             console.log("noerror");
             const tweet = {
