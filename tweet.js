@@ -3,7 +3,7 @@ const twit = require('twit');
 const moment = require('moment');
 const _ = require('lodash');
 const { spawn } = require('child_process');
-const sharp = require('sharp');
+//const sharp = require('sharp');
 
 const twitterConfig = {
     consumer_key: process.env.CONSUMER_KEY,
@@ -63,7 +63,7 @@ async function tweett(tweetText, imageUrl) {
 async function tweet(tweetText, imageUrl) {
     const childPython = spawn('python', ['--version']);
     
-    const imagee = await sharp(imageUrl).toFormat('png').toBuffer();
+    //const imagee = await sharp(imageUrl).toFormat('png').toBuffer();
     
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
