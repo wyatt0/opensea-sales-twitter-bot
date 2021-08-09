@@ -63,7 +63,7 @@ async function tweett(tweetText, imageUrl) {
 async function tweet(tweetText, imageUrl) {
     const childPython = spawn('python', ['--version']);
     
-    const imagee = await sharp(imageUrl).toFormat('png').toBuffer();
+    
     
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
@@ -74,6 +74,8 @@ async function tweet(tweetText, imageUrl) {
     //console.log("PNG URL: " + pngimageUrl);
     
     const processedImage = await getBase64(imageUrl);
+    
+    const imagee = await sharp(processedImage).toFormat('png').toBuffer();
     //const processedPng = await getBase64(pngimageUrl);
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
