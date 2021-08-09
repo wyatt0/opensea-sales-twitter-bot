@@ -60,7 +60,7 @@ async function tweett(tweetText, imageUrl) {
 
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
-    const childPython = spawn('python', ['--version'];
+    const childPython = spawn('python', ['--version']);
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
     
