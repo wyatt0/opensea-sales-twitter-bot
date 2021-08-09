@@ -58,14 +58,22 @@ async function tweett(tweetText, imageUrl) {
                 //}
      //});
 }
-
+async function _arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = new Uint8Array(buffer);
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa( binary );
+}
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) { 
     const prcTest = await getBase64('https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png');
     
     //
     
-    /*
+    
     console.log("SVG URL: " + imageUrl);   
     const processedImage = await getBase64(imageUrl);
     console.log("yo"); 
@@ -75,14 +83,15 @@ async function tweet(tweetText, imageUrl) {
         .toBuffer()
         .then(data => { imagee = data })
         .catch(err => { console.log("Sharp error: " + err) });
-    console.log(imagee)*/
+    console.log(imagee)
+    const procb64 = _arrayBufferToBase64(imagee);
                        
     console.log("yoyo")
     //const processedPng = await getBase64(pngimageUrl);
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
-    twitterClient.post('media/upload', { media_data: prcTest }, (error, media, response) => {
+    twitterClient.post('media/upload', { media_data: procb64 }, (error, media, response) => {
         if (!error) {
             console.log("noerror");
             const tweet = {
