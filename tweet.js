@@ -85,7 +85,7 @@ async function tweet(tweetText, imageUrl) {
         .toFormat('png')
         .toBuffer()
         .then(data => { imagee = data })
-        .catch(err => { console.log(err) });
+        .catch(err => { console.log("Sharp error: " + err) });
     console.log(imagee)
                        
     console.log("yoyo")
