@@ -56,44 +56,19 @@ async function tweett(tweetText, imageUrl) {
                 //}
      //});
 }
-function svgString2Image(svgString) {
-    // SVG data URL from SVG string
-    var svgData = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString)));
-    // create canvas in memory(not in DOM)
-    var canvas = document.createElement('canvas');
-    // get canvas context for drawing on canvas
-    var context = canvas.getContext('2d');
-    // set canvas size
-    canvas.width = 800;
-    canvas.height = 800;
-    // create image in memory(not in DOM)
-    var image = new Image();
-    // later when image loads run this
-    image.onload = function () { // async (happens later)
-        // clear canvas
-        context.clearRect(0, 0, width, height);
-        // draw image with SVG data to canvas
-        context.drawImage(image, 0, 0, width, height);
-        // snapshot canvas as png
-        var pngData = canvas.toDataURL('image/png');
-        // pass png data URL to callback
-        return pngData;
-    }; // end async
-    // start loading SVG data into in memory image
-    image.src = svgData;
-}
+
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
 async function tweet(tweetText, imageUrl) {
     //const processedSVGBlob = await getBase64(imageUrl);
     //imageUrl = svgString2Image(processedSVGBlob);
     
     // Format our image to base64
-    const pngimageUrl = 'https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png';
+    //const pngimageUrl = 'https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png';
     console.log("SVG URL: " + imageUrl);
-    console.log("PNG URL: " + pngimageUrl);
+    //console.log("PNG URL: " + pngimageUrl);
     
     const processedImage = await getBase64(imageUrl);
-    const processedPng = await getBase64(pngimageUrl);
+    //const processedPng = await getBase64(pngimageUrl);
     //console.log("SVG Proccessed: " + processedImage);
     //console.log("PNG Proccessed: " + processedPng);
     // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
