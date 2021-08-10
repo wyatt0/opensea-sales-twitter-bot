@@ -45,57 +45,22 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
         }
     });
 }
-// Upload image of item retrieved from OpenSea & then tweet that image + provided text
-async function tweett(tweetText, imageUrl) {
-    const tweet = {
-                status: tweetText
-    };
-    //twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
-                //if (!error) {
-                //    console.log(`Successfully tweeted: ${tweetText}`);
-                //} else {
-                //    console.error(error);
-                //}
-     //});
-}
-async function _arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = new Uint8Array(buffer);
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
-    }
-    return window.btoa( binary );
-}
 
 // Upload image of item retrieved from OpenSea & then tweet that image + provided text
-async function tweet(tweetText, imageUrl) { 
-    const prcTest = await getBase64('https://upload.wikimedia.org/wikipedia/commons/4/47/VU-Banana-1000x1000.png');
-    
-    //
-    
-    
-    console.log("SVG URL: " + imageUrl);   
-    const processedImage = await getBase64(imageUrl);
-    console.log("yo"); 
-    let imagee = "";
-    await sharp(processedImage)
+async function tweet(tweetText, imageUrl) {  
+    //Convert url into buffer, then png, then base 64
+    const imageArrayBuffer = await getBuffer(imageUrl); 
+    let imagePNGArrayBuffer = "";
+    await sharp(imageArrayBuffer)
         .toFormat('png')
         .toBuffer()
-        .then(data => { imagee = data })
+        .then(data => { imagePNGArrayBuffer = data })
         .catch(err => { console.log("Sharp error: " + err) });
-    console.log(imagee)
-    //const procbb64 = Buffer.from(imagee).toString('base64')
-    const procb64 = base64ArrayBuffer(imagee);
+    const processedImage = arrayBufferToBase64(imagePNGArrayBuffer);
                        
-    console.log("yoyo")
-    //const processedPng = await getBase64(pngimageUrl);
-    //console.log("SVG Proccessed: " + processedImage);
-    //console.log("PNG Proccessed: " + processedPng);
-    // Upload the item's image from OpenSea to Twitter & retrieve a reference to it
-    twitterClient.post('media/upload', { media_data: procb64 }, (error, media, response) => {
+    twitterClient.post('media/upload', { media_data: processedImage }, (error, media, response) => {
         if (!error) {
-            console.log("noerror");
+            console.log("Tweet is valid");
             const tweet = {
                 status: tweetText,
                 media_ids: [media.media_id_string]
@@ -110,18 +75,18 @@ async function tweet(tweetText, imageUrl) {
                 }
             });*/
         } else {
-            console.error("yo?");
             console.error(error);
         }
     });
 }
 
 // Format a provided URL into it's base64 representation
-function getBase64(url) {
-    console.log("here3");
+function getBuffer(url) {
     return axios.get(url, { responseType: 'arraybuffer'}).then(response => Buffer.from(response.data, 'binary'))
 }
-function base64ArrayBuffer(arrayBuffer) {
+
+//Converts array buffer into base64
+function arrayBufferToBase64(arrayBuffer) {
   var base64    = ''
   var encodings = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
@@ -168,10 +133,10 @@ function base64ArrayBuffer(arrayBuffer) {
     c = (chunk & 15)    <<  2 // 15    = 2^4 - 1
 
     base64 += encodings[a] + encodings[b] + encodings[c] + '='
-  }
-  
+  } 
   return base64
 }
+
 module.exports = {
     handleDupesAndTweet: handleDupesAndTweet
 };
