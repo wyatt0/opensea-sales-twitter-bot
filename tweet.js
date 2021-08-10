@@ -66,14 +66,14 @@ async function tweet(tweetText, imageUrl) {
                 media_ids: [media.media_id_string]
             };
 
-            /*
+            
             twitterClient.post('statuses/update', tweet, (error, tweet, response) => {
                 if (!error) {
                     console.log(`Successfully tweeted: ${tweetText}`);
                 } else {
                     console.error(error);
                 }
-            });*/
+            });
         } else {
             console.error(error);
         }
