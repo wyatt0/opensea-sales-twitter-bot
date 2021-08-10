@@ -5,7 +5,6 @@ const { ethers } = require('ethers');
 const tweet = require('./tweet');
 
 function formatAndSendTweet(event) {
-    console.log("here1");
     const tokenName = _.get(event, ['asset', 'name']);
     const image = _.get(event, ['asset', 'image_url']);
     const openseaLink = _.get(event, ['asset', 'permalink']);
@@ -31,7 +30,7 @@ function formatAndSendTweet(event) {
 // Poll OpenSea every minute & retrieve all sales for a given collection in the last minute
 // Then pass those events over to the formatter before tweeting
 setInterval(() => {
-    const lastMinute = moment().startOf('hour').subtract(3000, "minutes").unix();
+    const lastMinute = moment().startOf('minute').subtract(59, "seconds").unix();
     
     axios.get('https://api.opensea.io/api/v1/events', {
         params: {
@@ -41,7 +40,6 @@ setInterval(() => {
             only_opensea: 'false'
         }
     }).then((response) => {
-        console.log("here2");
         const events = _.get(response, ['data', 'asset_events']);
 
         console.log(`${events.length} sales in the last minute...`);
@@ -50,7 +48,6 @@ setInterval(() => {
             return formatAndSendTweet(event);
         });
     }).catch((error) => {
-        console.error("here4");
         console.error(error);
     });
-}, 120000);
+}, 60000);
