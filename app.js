@@ -53,4 +53,4 @@ setInterval(() => {
         console.error("here4");
         console.error(error);
     });
-}, 60000);
+}, 120000);
