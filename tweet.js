@@ -41,6 +41,7 @@ async function handleDupesAndTweet(tokenName, tweetText, imageUrl) {
 
             console.error('Tweet is a duplicate; possible delayed transaction retrieved from OpenSea');
         } else {
+            console.error("handleDupesAndTweetsError");
             console.error(err);
         }
     });
@@ -71,10 +72,12 @@ async function tweet(tweetText, imageUrl) {
                 if (!error) {
                     console.log(`Successfully tweeted: ${tweetText}`);
                 } else {
+                    console.error("TweetError");
                     console.error(error);
                 }
             });
         } else {
+            console.error("TweetError");
             console.error(error);
         }
     });
