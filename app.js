@@ -12,8 +12,8 @@ function formatAndSendTweet(event) {
     const usdValue = _.get(event, ['payment_token', 'usd_price']);
     const tokenSymbol = _.get(event, ['payment_token', 'symbol']);
 
-    const formattedTokenPrice = ethers.utils.formatEther(totalPrice.toString());
-    const formattedUsdPrice = (formattedTokenPrice * usdValue).toFixed(2);
+    const formattedTokenPrice = ethers.utils.formatEther(totalPrice.toString());    
+    const formattedUsdPrice = parseInt((formattedTokenPrice * usdValue).toFixed(0)).toLocaleString();
     const formattedPriceSymbol = (
         (tokenSymbol === 'WETH' || tokenSymbol === 'ETH') 
             ? 'Ξ' 
