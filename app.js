@@ -42,10 +42,6 @@ setInterval(() => {
             X-API-KEY: 'af314385a7a24c72bfa1b23626037016'
         }}, 
         { headers: {
-            collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
-            event_type: 'successful',
-            occurred_after: lastMinute,
-            only_opensea: 'false',
             X-API-KEY: 'af314385a7a24c72bfa1b23626037016'
         }}
     ).then((response) => {
