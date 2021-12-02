@@ -41,7 +41,7 @@ setInterval(() => {
             only_opensea: 'false'
         }}, 
         { headers: {
-            X-API-KEY: 'af314385a7a24c72bfa1b23626037016'
+            'X-API-KEY': 'af314385a7a24c72bfa1b23626037016'
         }}
     ).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
