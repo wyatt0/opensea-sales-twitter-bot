@@ -33,15 +33,22 @@ setInterval(() => {
     //Retrieve data from last 10 minutes
     const lastMinute = moment().startOf('minute').subtract(599, "seconds").unix();
     
-    axios.get('https://api.opensea.io/api/v1/events', {
-        params: {
+    axios.get('https://api.opensea.io/api/v1/events', 
+        { params: {
             collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false',
             X-API-KEY: 'af314385a7a24c72bfa1b23626037016'
-        }
-    }).then((response) => {
+        }}, 
+        { headers: {
+            collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
+            event_type: 'successful',
+            occurred_after: lastMinute,
+            only_opensea: 'false',
+            X-API-KEY: 'af314385a7a24c72bfa1b23626037016'
+        }}
+    ).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
         console.log(`${events.length} sales in the last minute...`);
