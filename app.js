@@ -34,15 +34,16 @@ setInterval(() => {
     const lastMinute = moment().startOf('minute').subtract(599, "seconds").unix();
     
     axios.get('https://api.opensea.io/api/v1/events', 
-        params: {
+        { headers: {
+            'X-API-KEY': 'af314385a7a24c72bfa1b23626037016'
+        }},
+        { params: {
             collection_slug: process.env.OPENSEA_COLLECTION_SLUG,
             event_type: 'successful',
             occurred_after: lastMinute,
             only_opensea: 'false'
-        }, 
-        headers: {
-            'X-API-KEY': 'af314385a7a24c72bfa1b23626037016'
-        }
+        }} 
+        
     ).then((response) => {
         const events = _.get(response, ['data', 'asset_events']);
 
